@@ -1,0 +1,24 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+    
+    Webkul\UVDesk\ExtensionFrameworkBundle\:
+        resource: '../../*'
+        exclude: '../../{DependencyInjection,Templates,Package}'
+    
+    Webkul\UVDesk\ExtensionFrameworkBundle\EventListener\Kernel:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }
+            - { name: kernel.event_listener, event: kernel.controller_arguments }
+    
+    Webkul\UVDesk\ExtensionFrameworkBundle\EventListener\Console:
+        tags:
+            - { name: kernel.event_listener, event: console.command }
+            - { name: kernel.event_listener, event: console.terminate }
+    
+    # Aliases
+    uvdesk_extension.twig_loader:
+        public: true
+        alias: twig.loader
