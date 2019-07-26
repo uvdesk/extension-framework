@@ -22,34 +22,9 @@
 {% block pageContent %}
 	<div class="uv-inner-section">
 		<div class="uv-view" style="padding-left: 20px;">
-			<h1 id="app-current-title">Apps Dashboard</h1>
+			<h1 id="app-current-title">Applications</h1>
 
-			<div class="uv-action-bar">
-                <div class="uv-action-col-wrapper">
-					<div class="uv-action-col-wrapper uv-width-full">
-						{# Sorting Filter #}
-						<div class="uv-action-bar-col-lt">
-							<div class="filter">
-								<div class="uv-dropdown sort">
-									<div class="uv-dropdown-btn uv-vertical-align uv-margin-right-5">Sort By: Date Released</div>
-
-									<div class="uv-dropdown-list uv-bottom-left">
-										<div class="uv-dropdown-container">
-											<label>Sort By</label>
-											<ul></ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						{# Search Filter #}
-						<div class="uv-action-bar-col-rt">
-							<input type="text" class="uv-search-inline uv-search-inline-300" placeholder="Search">
-						</div>
-					</div>
-                </div>
-            </div>
+			<div class="uv-hr"></div>
 
 			{# App Listing #}
 			<div class="uv-view-plank" id="application-list"></div>
@@ -278,12 +253,6 @@
 
 					filter.sortCollection(sortField, order);
 					applicationCollection.syncData();
-
-					titleFullText = '{{ "%type% Apps"|trans({"%type%": "replaceString", "Apps": "Apps"|trans }) }}';
-					titleFullText = titleFullText.replace('replaceString', titleText).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-					$('#app-current-title').html(titleFullText);
-					$('.uv-aside-nav-active').removeClass('uv-aside-nav-active');
-					$('.uv-aside li a[data-filter="'+titleText+'"]').addClass('uv-aside-nav-active');;
 				},
 			});
 
