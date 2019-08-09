@@ -85,11 +85,12 @@ class Kernel
             list($vendor, $package) = explode('/', $attributes['metadata']['name']);
 
             if (is_dir($resources)) {
-                $twig->addPath($resources, sprintf("_uvdesk_extension_%s_%s", $vendor, $package));
+                $twig->addPath($resources, sprintf("_uvdesk_extension_%s_%s", str_replace('-', '_', $vendor), str_replace('-', '_', $package)));
             }
         }
 
         $this->isTwigConfigured = true;
+        
         return $this;
     }
 }

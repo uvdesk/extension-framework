@@ -22,6 +22,4 @@ SVG;
     public abstract function getDescription() : string;
 
     public abstract function getQualifiedName() : string;
-
-    public abstract function getDashboardTemplate() : string;
 }

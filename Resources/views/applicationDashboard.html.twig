@@ -1,6 +1,6 @@
 {% extends "@UVDeskCoreFramework//Templates//layout.html.twig" %}
 
-{% block title %}Application Dashboard{% endblock %}
+{% block title %}{{ application.getMetadata().getName() }}{% endblock %}
 
 {% block templateCSS %}
     <style>

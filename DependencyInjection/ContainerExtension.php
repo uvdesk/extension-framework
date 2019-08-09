@@ -71,7 +71,7 @@ class ContainerExtension extends Extension
                     $schema = $class->newInstanceWithoutConstructor()->getConfiguration();
 
                     if (!empty($schema)) {
-                        $qualifiedName = str_replace('/', '_', $attributes['name']);
+                        $qualifiedName = str_replace(['/', '-'], '_', $attributes['name']);
     
                         if (empty($availableConfigurations[$qualifiedName])) {
                             throw new \Exception("No available configurations found for package '" . $attributes['name'] . "'");

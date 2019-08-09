@@ -47,7 +47,7 @@ class Configurator
 		$package->setMetadata($metadata);
 
 		if ($package instanceof ConfigurablePackageInterface) {
-			$configurationFilepath = $this->container->getParameter("kernel.project_dir") . "/config/extensions/" . str_replace('/', '_', $attributes['metadata']['name']) . ".yaml";
+			$configurationFilepath = $this->container->getParameter("kernel.project_dir") . "/config/extensions/" . str_replace(['/', '-'], '_', $attributes['metadata']['name']) . ".yaml";
 
 			$package->setConfigurationFilepath($configurationFilepath);
 			$package->setConfigurationParameters($attributes['configurations']);
