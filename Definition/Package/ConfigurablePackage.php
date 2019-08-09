@@ -9,10 +9,7 @@ abstract class ConfigurablePackage extends Package implements ConfigurablePackag
     protected $configurationFilepath;
     protected $configurationParameters = [];
 
-    public function getConfiguration() : ?ConfigurationInterface
-    {
-        return null;
-    }
+    public abstract function getConfiguration() : ConfigurationInterface;
 
     final public function setConfigurationFilepath(string $configurationFilepath) : ConfigurablePackageInterface
     {

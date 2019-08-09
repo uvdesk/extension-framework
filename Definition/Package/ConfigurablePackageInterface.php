@@ -6,7 +6,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 interface ConfigurablePackageInterface extends PackageInterface
 {
-    public function getConfiguration() : ?ConfigurationInterface;
+    public function getConfiguration() : ConfigurationInterface;
 
     public function setConfigurationFilepath(string $configurationFilepath) : ConfigurablePackageInterface;
 

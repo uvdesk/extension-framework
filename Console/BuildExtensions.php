@@ -213,7 +213,7 @@ class BuildExtensions extends Command
 
             if ($packageReflectionClass->implementsInterface(ConfigurablePackageInterface::class)) {
                 $configurablePackage = $packageReflectionClass->newInstanceWithoutConstructor();
-                $configurablePackage->setConfigurationFilepath($pathToConfig . "/" . str_replace('/', '_', $packageMetadata->getName()) . ".yaml");
+                $configurablePackage->setConfigurationFilepath($pathToConfig . "/" . str_replace(['/', '-'], '_', $packageMetadata->getName()) . ".yaml");
 
                 if (!file_exists($configurablePackage->getConfigurationFilepath()) || is_dir($configurablePackage->getConfigurationFilepath())) {
                     $configurablePackage->install();
