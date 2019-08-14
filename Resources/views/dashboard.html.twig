@@ -23,7 +23,7 @@
 {% block pageContent %}
 	<div class="uv-inner-section">
 		<div class="uv-view" style="padding-left: 20px;">
-			<h1 id="app-current-title">Applications</h1>
+			<h1 id="app-current-title">Installed Applications</h1>
 
 			<div class="uv-hr"></div>
 
@@ -56,8 +56,7 @@
 
 		<a href="<%= pathToApplication %>">
 			<div class="uv-app-banner" style="background-image: url('<%= icon %>')"></div>
-			<h4 style="color: #464646; line-height: 1.4em; text-align: center;"><%= name %></h4>
-			<p style="margin: unset; line-height: 1.4em; margin-top: 10px; text-align: justify;"><%= summary %></p>
+			<h4 style="color: #464646; line-height: 1.4em; text-align: center; font-weight: normal;"><%= name %></h4>
 		</a>
     </script>
 
