@@ -95,6 +95,7 @@ class Console
     {
         $collection = [];
         $prefix = dirname(__DIR__) . '/Resources/public/extensions';
+        $prefix = $this->container->getParameter('kernel.project_dir') . '/public/community-packages';
 
         foreach (array_keys($this->mappingResource->getPackages()) as $id) {
             $packageReflectionClass = new \ReflectionClass($id);

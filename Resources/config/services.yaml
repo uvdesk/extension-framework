@@ -22,3 +22,7 @@ services:
     uvdesk_extension.twig_loader:
         public: true
         alias: twig.loader
+    
+    uvdesk_extension.assets_manager:
+        public: true
+        alias: assets.packages
