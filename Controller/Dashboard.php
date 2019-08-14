@@ -26,7 +26,6 @@ class Dashboard extends Controller
             return [
                 'icon' => $assetsManager->getUrl($metadata->getIconPath()),
                 'name' => $metadata->getName(),
-                'summary' => $metadata->getSummary(),
                 'qname' => $metadata->getQualifiedName(),
                 'reference' => [
                     'vendor' => $packageMetadata->getVendor(),
