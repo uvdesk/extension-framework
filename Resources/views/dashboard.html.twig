@@ -14,7 +14,8 @@
 			padding: 30px;
 			border-radius: 50%;
 			margin: 0 auto 20px;
-			background-image: linear-gradient(to right, #7E91F0 0%, #7E91F0 100%);
+			background-position: center;
+			background-size: cover;
         }
     </style>
 {% endblock %}
@@ -54,9 +55,9 @@
 		<% pathToApplication = pathToApplication.replace('rep_v', reference.vendor).replace('rep_e', reference.package).replace('rep_q', qname) %>
 
 		<a href="<%= pathToApplication %>">
-			<div class="uv-app-banner"><%= icon %></div>
-			<h4 style="color: #464646; line-height: 1.4em;"><%= name %></h4>
-			<p style="margin: unset; line-height: 1.4em; margin-top: 10px;"><%= summary %></p>
+			<div class="uv-app-banner" style="background-image: url('<%= icon %>')"></div>
+			<h4 style="color: #464646; line-height: 1.4em; text-align: center;"><%= name %></h4>
+			<p style="margin: unset; line-height: 1.4em; margin-top: 10px; text-align: justify;"><%= summary %></p>
 		</a>
     </script>
 

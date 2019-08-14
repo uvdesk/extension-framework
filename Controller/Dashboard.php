@@ -17,12 +17,14 @@ class Dashboard extends Controller
 
     public function applicationsXHR(Request $request, ApplicationCollection $applications)
     {
-        $collection = array_map(function ($application) {
+        $assetsManager = $this->get('uvdesk_extension.assets_manager');
+
+        $collection = array_map(function ($application) use ($assetsManager) {
             $metadata = $application->getMetadata();
             $packageMetadata = $application->getPackage()->getMetadata();
 
             return [
-                'icon' => $metadata->getIcon(),
+                'icon' => $assetsManager->getUrl($metadata->getIconPath()),
                 'name' => $metadata->getName(),
                 'summary' => $metadata->getSummary(),
                 'qname' => $metadata->getQualifiedName(),
