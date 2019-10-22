@@ -2,8 +2,12 @@
     <img src="https://s3-ap-southeast-1.amazonaws.com/cdn.uvdesk.com/uvdesk/bundles/webkuldefault/images/uvdesk-wide.svg">
 </a></p>
 
-UVDesk Extension Framework Bundle
---------------
+<p align="center">
+    <a href="https://packagist.org/packages/uvdesk/extension-framework"><img src="https://poser.pugx.org/uvdesk/extension-framework/v/stable.svg" alt="Latest Stable Version"></a>
+    <a href="https://packagist.org/packages/uvdesk/extension-framework"><img src="https://poser.pugx.org/uvdesk/extension-framework/d/total.svg" alt="Total Downloads"></a>
+    <a href="https://packagist.org/packages/uvdesk/extension-framework"><img src="https://poser.pugx.org/uvdesk/extension-framework/license.svg" alt="License"></a>
+    <a href="https://gitter.im/uvdesk/extension-framework"><img src="https://badges.gitter.im/uvdesk/extension-framework.svg" alt="connect on gitter"></a>
+</p>
 
 The extension framework bundle empowers merchants and developers alike with the ability to utilize the full benefits of the uvdesk community.
 
