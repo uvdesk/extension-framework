@@ -27,6 +27,11 @@ SVG;
         return 'uvdesk_extensions_applications_dashboard';
     }
 
+    public static function getRoles() : array
+    {
+        return [];
+    }
+
     public function getChildrenRoutes() : array
     {
         return [];
