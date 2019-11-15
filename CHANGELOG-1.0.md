@@ -3,6 +3,10 @@ CHANGELOG for 1.0.x
 
 This changelog references any relevant changes introduced in 1.0 minor versions.
 
+* 1.0.2 (2019-11-15)
+    * **Misc. Updates:**
+        * Included Github issue templates
+
 * 1.0.1 (2019-10-22)
     * **Misc. Updates:**
         * Updated README.md with link to the official gitter chat for uvdesk/extension-framework
