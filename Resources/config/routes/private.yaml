@@ -21,3 +21,27 @@ uvdesk_extensions_standalone_application_callback_endpoint:
     path:     /apps/{vendor}/{package}/{qualifiedName}/callback
     controller: Webkul\UVDesk\ExtensionFrameworkBundle\Controller\Application::callbackEndpointXHR
     methods: [GET, POST]
+
+# FORMBUILDER PATHS:
+formbuilder_settings:
+    path:     /settings/formbuilder
+    controller: Webkul\UVDesk\ExtensionFrameworkBundle\Controller\FormBuilderChannel::loadFormBuilders
+
+formbuilder_load_configurations_xhr:
+    path:   /settings/formbuilder/xhr
+    controller: Webkul\UVDesk\ExtensionFrameworkBundle\Controller\FormBuilderChannelXHR::loadFormsXHR
+
+formbuilder_create_configuration:
+    path:     /settings/formbuilder/create
+    controller: Webkul\UVDesk\ExtensionFrameworkBundle\Controller\FormBuilderChannel::createFormBuilderConfiguration
+
+formbuilder_update_configuration:
+    path: /settings/formbuilder/update/{id}
+    controller: Webkul\UVDesk\ExtensionFrameworkBundle\Controller\FormBuilderChannel::updateFormConfiguration
+    defaults: { id: ''}
+
+formbuilder_remove_configuration_xhr:
+    path: /settings/formbuilder/remove/{id}
+    controller: Webkul\UVDesk\ExtensionFrameworkBundle\Controller\FormBuilderChannelXHR::removeFormConfiguration
+    defaults: {id: ''}
+

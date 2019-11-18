@@ -1,0 +1,367 @@
+{% extends "@UVDeskCoreFramework//Templates//layout.html.twig" %}
+
+{% block title %} 
+	{{ 'Mailbox Settings'|trans }}
+{% endblock %}
+
+{% block pageContent %}
+	<style>
+		.section-heading {
+			font-size: 16px;
+			margin: 0px;
+			line-height: 1.4em;
+		}
+
+		.section-description {
+			color: #6F6F6F;
+			margin-top: unset !important;
+			margin-bottom: 20px;
+			line-height: 1.4em;
+		}
+
+		.uv-element-block .uv-field-message {
+			font-style: normal;
+			margin: 0px 0px 20px 0px;
+		}
+
+        .uv-field-info {
+            display: block;
+            font-style: italic;
+            color:#6F6F6F;
+        }
+
+        .li-item {
+            width: 36%;
+            border: 1px dashed gray;
+            box-sizing: border-box;
+            padding: 5px;
+            border-radius: 2px;
+            list-style-type: none;
+            margin: 10px; 
+        }
+
+        .uv-cf-textbox {
+            width: 24px;
+            height: 20px;
+            display: inline-block;
+            vertical-align: left;
+            background-position: 0px -181px;
+        }
+
+        .uv-cf-textarea {
+            width: 24px;
+            height: 20px;
+            display: inline-block;
+            vertical-align: left;
+            background-position: -25px -181px;
+        }
+
+        .uv-checkbox input{
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .uv-dashed-field {
+            display: inline-block;
+            border: 1px dashed gray;
+            padding: 5px;
+            border-radius: 2px; 
+            box-sizing: border-box; 
+            width: 34%;
+            margin-bottom: 10px;   
+        }
+
+        .mandatory-fields {
+            border: 1px solid gray;
+            width: 46%;
+            border-radius: 4px;
+            box-sizing: border-box;
+            padding: 10px; 
+        }
+
+        .optional-fields {
+            margin-top: 15px; 
+            border: 1px solid gray;
+            width: 46%;
+            border-radius: 4px;
+            box-sizing: border-box;
+            padding: 10px; 
+        }
+	</style>
+
+	<div class="uv-inner-section">
+		{# Append Panel Aside #}
+		{% set asideTemplate = 'Webkul\\UVDesk\\CoreFrameworkBundle\\Dashboard\\AsideTemplate' %}
+		{% set asideSidebarReference = 'Webkul\\UVDesk\\CoreFrameworkBundle\\UIComponents\\Dashboard\\Panel\\Sidebars\\Settings' %}
+		{{ uvdesk_extensibles.getRegisteredComponent(asideTemplate).renderSidebar(asideSidebarReference) | raw }}
+
+		<div class="uv-view {% if app.request.cookies and app.request.cookies.get('uv-asideView') %}uv-aside-view{% endif %}">
+            {% if formbuilder is not empty and formbuilder.id is defined %}
+				<h1>Update FormBuilder</h1>
+			{% else %}
+				<h1>New FormBuilder</h1>
+			{% endif %}
+
+
+            <div class="uv-hr"></div>
+			
+            {% if formbuilder is not empty %}
+             <form method="post" action="{{ path('formbuilder_update_configuration', {'id': formbuilder.id}) }}" id="formbuilder-settings-view">
+            {% else %}
+			    <form method="post" action="{{ path('formbuilder_create_configuration') }}" id="formbuilder-settings-view">
+            {% endif %}
+
+                {% if formbuilder is empty %}
+				Form Name
+                {% endif %}
+
+				<div class="uv-element-block">
+					<label class="uv-field-label">Name:</label>
+
+					<div class="uv-field-block">
+						{% if formbuilder is defined and formbuilder.id is defined %}
+							<input type="text" name="form_name" class="uv-field" value="{{formbuilder.form_name}}" required/>
+						{% else %}
+							<input type="text" name="form_name" class="uv-field" value="" placeholder="Form Name" required/>
+						{% endif %}
+					</div>
+				</div>
+
+                {% if formbuilder is defined and formbuilder.id is defined %}
+                    <div class="uv-element-block">
+                        <label class="uv-field-label">ID:</label>
+                        <div class="uv-field-block">
+                            <input type="text" name="id" class="uv-field" value="{{ formbuilder.id}}" disabled />
+                        </div>
+                    </div>
+                {%  endif %}
+
+                
+                <div class="mandatory-fields">
+                    <div class="heading">
+                        MANDATORY FIELDS
+                    </div>
+                    <span class="uv-field-info">These fields will be visible in form and can't be edited</span>
+                    <ul>
+                        <li class="li-item">
+                            <span class="uv-cf-textbox"></span>
+                            Email
+                            <input type="hidden" name="" value="">
+                        </li>
+                        <li class="li-item">
+                            <span class="uv-cf-textarea"></span>
+                            Reply
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="optional-fields">
+                    {% if formbuilder is empty %}
+                        <div class="heading">
+                            OPTIONAL FIELDS
+                        </div>
+                        <span class="uv-field-info">Select These Fields to Add in your Form</span>
+                    {% endif %}
+                    <ul style="list-style-type:none;">
+                        <li>
+                            <div class="uv-checkbox">
+                                {% if formbuilder is not empty and formbuilder.name == '1' %}
+                                    <input type="checkbox"  name="name" value="1" checked>
+                                {% else %}
+                                    <input type="checkbox"  name="name" value="1">
+                                {% endif %}
+                                <span class="uv-checkbox-view"></span>
+                            </div>
+                            <div class="uv-dashed-field">
+                                <span class="uv-cf-textbox"></span>
+                                Name
+                            </div>
+                        </li>
+                        <li>
+                            <div class="uv-checkbox">
+                                    {% if formbuilder is not empty and formbuilder.type == '1' %}
+                                        <input type="checkbox" id="formbuilder_type" name="type" value="1" checked>
+                                    {% else %}
+                                        <input type="checkbox" id="formbuilder_type" name="type" value="1" >
+                                    {% endif %}
+                                <span class="uv-checkbox-view"></span>
+                            </div>
+                            <div class="uv-dashed-field">
+                                <span class="uv-cf-select"></span>
+                                Type
+                            </div>
+                        </li>
+                        <li>
+                            <div class="uv-checkbox">
+
+                                {% if formbuilder is not empty and formbuilder.subject == '1'%}
+                                    <input type="checkbox" id="formbuilder_subject" name="subject" value="1" checked>
+                                {% else %}
+                                    <input type="checkbox" id="formbuilder_subject" name="subject" value="1" >
+                                {% endif %}
+                                <span class="uv-checkbox-view"></span>
+                            </div>
+                            <div class="uv-dashed-field">
+                                <span class="uv-cf-textarea"></span>
+                                Subject
+                            </div>
+                        </li>
+                        <li>
+                            <div class="uv-checkbox">
+                            
+                                {% if formbuilder is not empty and formbuilder.gdpr == '1'%}
+                                    <input type="checkbox" id="formbuilder_gdpr" name="gdpr" value="1" checked>
+                                {% else %}
+                                    <input type="checkbox" id="formbuilder_gdpr" name="gdpr" value="1">
+                                {% endif %}
+                                <span class="uv-checkbox-view"></span>
+                            </div>
+                            <div class="uv-dashed-field">
+                                <span class="uv-cf-textarea"></span>
+                                GDPR
+                            </div>
+                        </li>
+                        <li>
+                                <div class="uv-checkbox">
+
+                                    {% if formbuilder is not empty and formbuilder.order_no == '1'%}
+                                        <input type="checkbox" id="formbuilder_order_no" name="order_no" value="1" id="check1238" checked>
+                                    {% else %}
+                                        <input type="checkbox" id="formbuilder_order_no" name="order_no" value="1" id="check1238" >
+                                    {% endif %}
+                                    <span class="uv-checkbox-view"></span>
+                                </div>
+                                <div class="uv-dashed-field">
+                                    <span class="uv-cf-textbox"></span>
+                                    Order#
+                                </div>
+                        </li>
+                        <li>
+                                <div class="uv-checkbox">
+
+                                    {% if formbuilder is not empty and formbuilder.file == '1' %}
+                                        <input type="checkbox" id="formbuilder_file" name="file" value="1" id="check1246" checked>
+                                    {% else %}
+                                        <input type="checkbox" id="formbuilder_file" name="file" value="1" id="check1246">
+                                    {% endif %}
+                                    <span class="uv-checkbox-view"></span>
+                                </div>
+                                <div class="uv-dashed-field">
+                                    <span class="uv-cf-textbox"></span>
+                                    File Attachment
+                                </div>
+                        </li>
+
+                    </ul>
+                </div>
+				
+				{% if formbuilder is not empty and formbuilder.id is defined  %}
+					<input class="uv-btn btn-submission"  href="#" value="{{ 'Update'|trans }}" type="submit">
+                    <a href="{{path('formbuilder_preview_form', {'id': formbuilder.id}) }}"  ><input class="uv-btn" href="#" value="{{ 'Preview'|trans }}" ></a>
+                    <input class="uv-btn" value="{{'Embed'|trans}}" >
+				{% else %}
+					<input class="uv-btn btn-submission" href="#" value="{{ 'Create FormBuilder'|trans }}" type="submit">
+				{% endif %}
+			</form>
+           
+		</div>
+	</div>
+{% endblock %}
+
+{% block footer %}
+	{{ parent() }}
+
+	<script type="text/javascript">
+		$(function () {
+			var FormBuilderConfigurationModel = Backbone.Model.extend({
+                idAttribute: "id",
+                validation: {
+					form_name: function(value) {
+						if (value == undefined || value == '') {
+							return "Please specify a valid name for your FormBuilder.";
+						}
+                    },
+				}
+			});
+
+            var FormBuilderConfigurationView = Backbone.View.extend({
+                events: {
+                    'click #embed-btn': 'embedModal',
+                    'click .btn-submission' : "validateSubmission",
+                },
+                initialize: function() {
+                    Backbone.Validation.bind(this);
+                },
+                validateSubmission: function(e) {
+                    e.preventDefault();
+                    this.model.set(this.$el.serializeObject());
+
+			        if (this.model.isValid(true)) {
+			            this.$el.submit();
+			        }
+                }
+            });
+
+			var MailboxConfigurationView = Backbone.View.extend({
+                imap_conf_template_custom: _.template($("#imap_conf_template_custom").html()),
+                imap_conf_template_predefined: _.template($("#imap_conf_template_predefined").html()),
+				events: {
+                    'change #cta-mailbox-imap-transport': 'changeImapTransportType',
+					'click .btn-submission' : "validateSubmission",
+
+				},
+				initialize: function() {
+                    Backbone.Validation.bind(this);
+                    this.renderTransportConfigurations();
+				},
+                changeImapTransportType: function(e) {
+                    if (true) {
+                        this.model.set('transport', $(e.target).val());
+                    }
+
+                    this.renderTransportConfigurations();
+                },
+                renderTransportConfigurations: function() {
+                    switch (this.model.get('transport')) {
+                        case 'custom':
+                            $('.imap-setting-references').html(this.imap_conf_template_custom(this.model.attributes));
+                            break;
+                        case 'gmail':
+                            $('.imap-setting-references').html(this.imap_conf_template_predefined(this.model.attributes));
+                            break;
+                        case 'yahoo':
+                            $('.imap-setting-references').html(this.imap_conf_template_predefined(this.model.attributes));
+                            break;
+                        default:
+                            break;
+                    }
+                },
+                validateSubmission: function(e) {
+                    e.preventDefault();
+                    this.model.set(this.$el.serializeObject());
+
+			        if (this.model.isValid(true)) {
+			            this.$el.submit();
+			        }
+                }
+			});
+
+
+            {% if mailbox is defined %}
+                new MailboxConfigurationView({
+                    el: $("#mailbox-settings-view"),
+                    model: new MailboxConfigurationModel({
+						transport: "{{ mailbox.imapConfiguration.code }}",
+						host: "{{ mailbox.imapConfiguration.host }}",
+						username: "{{ mailbox.imapConfiguration.username }}",
+					})
+                });
+            {% else %}
+                new MailboxConfigurationView({
+                    el: $("#mailbox-settings-view"),
+                    model: new MailboxConfigurationModel({ transport: 'custom' })
+                });
+            {% endif %}
+		});
+	</script>
+{% endblock %}

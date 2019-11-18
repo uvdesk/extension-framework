@@ -1,0 +1,135 @@
+{# {% extends "@UVDeskCoreFramework/Templates/layout.html.twig" %} #}
+
+{% block pageContent %}
+    <link href="{{ asset('bundles/uvdeskcoreframework/css/_uikit.css') }}" type="text/css" rel="stylesheet" media="all" />
+    <style>
+        #ticket-form {
+            margin-left: 60px; 
+            margin-top: 30px; 
+        }
+
+        .validation-message {
+            color: red;
+        }
+    </style>
+
+    
+    {# <script src="https://code.jquery.com/jquery-3.4.1.js" text="text/javascript" >
+
+       function processForm()
+       {
+           var elements = document.getElementById('ticket-form').elements;
+           var textBool = true; 
+           var messageBool = true; 
+           for(var i = 0; i < elements.length; i++)
+           {
+               if( elements[i].type == "text" && elements[i].value.trim.length == 0 )
+               {
+                   textBool = false; 
+               }
+           }
+           if( document.getElementById('ticket-message').value.trim.length == 0))
+           {
+               messageBool = false; 
+           }
+
+           if( textBool && messageBool)
+           {
+               console.log("sending ajax data");
+               $.ajax({
+                url: {{ path('formbuilder_preview_form')}},
+                method: 'POST',
+                data: $('form[id="ticket-form"]');
+            });
+           }
+
+       } #}
+    
+    </script>
+
+    {% if formbuilder is not empty and formbuilder.id is defined %}
+
+         <form method="POST" enctype="multipart/form-data" id="ticket-form">
+
+            <h2><b>{{ formbuilder.form_name }}</b></h2>
+           
+             {# {% if formbuilder.name == '1'%} #}
+                 <div class="uv-element-block">
+                     <label class="uv-field-label">Name</label>
+                         <div class="uv-field-block">
+                            <input name="name" class="uv-field create-ticket" type="text" value="" required>
+                            <span class="validation-message"></span>
+                         </div>
+                     <span class="uv-field-info">Customer Full Name</span>
+                 </div>
+             {# {% endif %} #}
+             {# Email is a mandatory field. #}
+             <div class="uv-element-block">
+                 <label class="uv-field-label">Email</label>
+                     <div class="uv-field-block">
+                         <input name="email" class="uv-field create-ticket" type="text" value="" required> 
+                         <span class="validation-message"></span>
+                     </div>
+                 <span class="uv-field-info">Customer Email Address</span>
+             </div>
+             {# Reply/Message is a mandatory field. #}
+             <div class="uv-element-block">
+                 <label class="uv-field-label">Message</label>
+                     <div class="uv-field-block">
+                         <textarea name="reply" class="uv-field create-ticket" type="text" id='ticket-message'></textarea required>
+                         <span class="validation-message"></span>
+                     </div>
+                 <span class="uv-field-info">Ticket query message</span>
+             </div>
+             {% if formbuilder.type == '1'%}
+             {% endif %}
+             {% if formbuilder.subject == '1'%}
+                 <div class="uv-element-block">
+                     <label class="uv-field-label">Subject</label>
+                         <div class="uv-field-block">
+                             <input name="subject" class="uv-field create-ticket" type="text" value="" required>
+                             <span class="validation-message"></span>
+                         </div>
+                     <span class="uv-field-info">Ticket Subject</span>
+                 </div>
+             {% endif %}
+             {% if formbuilder.order_no == '1'%}
+                 <div class="uv-element-block">
+                     <label class="uv-field-label">Order #</label>
+                         <div class="uv-field-block">
+                             <input name="order_no" class="uv-field create-ticket" type="text" value="" required>
+                             <span class="validation-message"></span>
+                         </div>
+                     <span class="uv-field-info">Order Number</span>
+                 </div>
+             {% endif %}
+             {% if formbuilder.file == '1'%}
+                 <div class="uv-element-block attachment-block uv-no-error-success-icon">
+                     <label>
+                         {# <span class="uv-file-label">Add Attachment</span> #}
+                         <input type="file" name="file">
+                     </label>
+                 </div>
+             {% endif %}
+             {% if formbuilder.gdpr == '1'%}
+                 <div class="uv-element-block">
+                     <div class="uv-field-block uv-vertical-align" name="gdpr_compliance">
+                         <input type="checkbox" id="gdpr" style="margin-left: unset;width: 20px;height: 25px;">
+                         <span style="position: relative;top: -8px">I agree to the <a href="https://www.uvdesk.com/en/gdpr" target="_blank">  Terms &amp; Conditions</a></span>
+                     </div>
+                 </div>
+             {% endif %}
+             
+             <div>
+                 <button onclick="processForm()" id="create-ticket-btn" class="uv-btn">Create Ticket</button>
+             </div>
+         </form>
+        
+
+    {% else %}
+        <h2> Unable to render FormBuilder Preview. </h2>
+    {% endif %}
+
+
+{% endblock %}
+

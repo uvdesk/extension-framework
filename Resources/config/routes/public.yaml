@@ -1,0 +1,4 @@
+formbuilder_preview_form:
+    path: /formbuilder/preview/{id}
+    controller: Webkul\UVDesk\ExtensionFrameworkBundle\Controller\FormBuilderChannel::previewForm
+    defaults: {id: ''}
