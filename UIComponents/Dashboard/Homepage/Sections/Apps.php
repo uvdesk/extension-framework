@@ -8,12 +8,12 @@ class Apps extends HomepageSection
 {
     public static function getTitle() : string
     {
-        return "Apps";
+        return self::dynamicTranslation("Apps");
     }
 
     public static function getDescription() : string
     {
-        return "Integrate apps as per as your needs to get things done faster than ever";
+        return self::dynamicTranslation("Integrate apps as per your needs to get things done faster than ever");
     }
 
     public static function getRoles() : array
