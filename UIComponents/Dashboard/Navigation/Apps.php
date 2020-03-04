@@ -3,7 +3,6 @@
 namespace Webkul\UVDesk\ExtensionFrameworkBundle\UIComponents\Dashboard\Navigation;
 
 use Webkul\UVDesk\CoreFrameworkBundle\Dashboard\Segments\NavigationInterface;
-
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
 use Symfony\Component\HttpFoundation\Request;
