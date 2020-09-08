@@ -5,13 +5,13 @@ namespace Webkul\UVDesk\ExtensionFrameworkBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Webkul\UVDesk\ExtensionFrameworkBundle\Utils\ApplicationCollection;
 use Webkul\UVDesk\ExtensionFrameworkBundle\Application\Routine\ApiRoutine;
 use Webkul\UVDesk\ExtensionFrameworkBundle\Application\Routine\RenderDashboardRoutine;
 
-class Application extends Controller
+class Application extends AbstractController
 {
     public function dashboard($vendor, $package, $qualifiedName, ApplicationCollection $applicationCollection, RenderDashboardRoutine $event)
     {
@@ -21,7 +21,7 @@ class Application extends Controller
             throw new \Exception("No application found with the qualified name of '$qualifiedName' within the '$vendor/$package' namespace.", 404);
         }
 
-        $dispatcher = new EventDispatcher();
+        $dispatcher = new EventDispatcherInterface();
         $dispatcher->addSubscriber($application);
         $dispatcher->dispatch($event, $event::getName());
 

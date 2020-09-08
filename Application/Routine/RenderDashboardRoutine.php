@@ -2,7 +2,7 @@
 
 namespace Webkul\UVDesk\ExtensionFrameworkBundle\Application\Routine;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use Webkul\UVDesk\CoreFrameworkBundle\Dashboard\DashboardTemplate;
 use Webkul\UVDesk\ExtensionFrameworkBundle\Application\RoutineInterface;
 use Webkul\UVDesk\ExtensionFrameworkBundle\Definition\ApplicationInterface;
