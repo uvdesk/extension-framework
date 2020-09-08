@@ -2,7 +2,7 @@
 
 namespace Webkul\UVDesk\ExtensionFrameworkBundle\Application\Routine;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Webkul\UVDesk\ExtensionFrameworkBundle\Application\RoutineInterface;
