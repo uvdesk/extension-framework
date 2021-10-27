@@ -3,6 +3,11 @@ CHANGELOG for 1.0.x
 
 This changelog references any relevant changes introduced in 1.0 minor versions.
 
+* 1.0.6 (2021-10-27)
+    * **Misc. Updates:**
+      * **Compatibility with php 8**
+      * **Controller updates and Event Dispatcher classes updates**
+     
 * 1.0.5 (2021-04-01)
     * **Misc. Updates:**
       * **Issue #07:** error when view any app installing under extension.
