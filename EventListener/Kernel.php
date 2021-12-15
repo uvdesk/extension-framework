@@ -22,7 +22,7 @@ class Kernel
 
     public function onKernelRequest(GetResponseEvent $event)
     {
-        if (!$event->isMasterRequest()) {
+        if (!$event->isMainRequest()) {
             return;
         }
 
@@ -33,7 +33,7 @@ class Kernel
 
     public function onKernelControllerArguments(FilterControllerArgumentsEvent $event)
     {
-        if (!$event->isMasterRequest()) {
+        if (!$event->isMainRequest()) {
             return;
         }
 
