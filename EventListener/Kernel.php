@@ -3,11 +3,11 @@
 namespace Webkul\UVDesk\ExtensionFrameworkBundle\EventListener;
 
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
-use Symfony\Component\HttpKernel\Event\FilterControllerArgumentsEvent;
+use Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
 use Webkul\UVDesk\ExtensionFrameworkBundle\Definition\MappingResource;
 
 class Kernel
@@ -20,7 +20,7 @@ class Kernel
         $this->mappingResource = $mappingResource;
     }
 
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest(RequestEvent $event)
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -31,7 +31,7 @@ class Kernel
         }
     }
 
-    public function onKernelControllerArguments(FilterControllerArgumentsEvent $event)
+    public function onKernelControllerArguments(ControllerArgumentsEvent $event)
     {
         if (!$event->isMasterRequest()) {
             return;
