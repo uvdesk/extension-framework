@@ -6,12 +6,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Webkul\UVDesk\ExtensionFrameworkBundle\Utils\ApplicationCollection;
 use Webkul\UVDesk\ExtensionFrameworkBundle\Application\Routine\ApiRoutine;
 use Webkul\UVDesk\ExtensionFrameworkBundle\Application\Routine\RenderDashboardRoutine;
 
-class Application extends Controller
+class Application extends AbstractController
 {
     public function dashboard($vendor, $package, $qualifiedName, ApplicationCollection $applicationCollection, RenderDashboardRoutine $event)
     {
