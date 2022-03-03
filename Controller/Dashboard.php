@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Webkul\UVDesk\ExtensionFrameworkBundle\Utils\ApplicationCollection;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class Dashboard extends AbstractController
 {
@@ -15,9 +16,9 @@ class Dashboard extends AbstractController
         return $this->render('@UVDeskExtensionFramework//dashboard.html.twig', []);
     }
 
-    public function applicationsXHR(Request $request, ApplicationCollection $applications)
+    public function applicationsXHR(Request $request, ApplicationCollection $applications, ContainerInterface $container)
     {
-        $assetsManager = $this->get('uvdesk_extension.assets_manager');
+        $assetsManager = $container->get('uvdesk_extension.assets_manager');
 
         $collection = array_map(function ($application) use ($assetsManager) {
             $metadata = $application->getMetadata();
