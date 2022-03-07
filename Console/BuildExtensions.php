@@ -36,8 +36,8 @@ class BuildExtensions extends Command
         $metadata = $this->prepareMetadata();
         $lockfile = $this->updateLockfile($metadata);
 
-        $this->updateComposerJson($lockfile, $output);
-        $this->autoconfigurePackages($metadata, $output);
+        $this->updateComposerJson($output, $lockfile);
+        $this->autoconfigurePackages($output, $metadata);
 
         return Command::SUCCESS;
     }
