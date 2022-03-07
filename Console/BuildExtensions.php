@@ -25,12 +25,12 @@ class BuildExtensions extends Command
         $this->setName('uvdesk_extensions:configure-extensions');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output):int
     {
         if ('dev' != $this->container->get('kernel')->getEnvironment()) {
             $output->writeln("\n<comment>This command is only allowed to be used in development environment.</comment>");
 
-            return;
+            return Command::INVALID;
         }
 
         $metadata = $this->prepareMetadata();
@@ -38,6 +38,8 @@ class BuildExtensions extends Command
 
         $this->updateComposerJson($lockfile, $output);
         $this->autoconfigurePackages($metadata, $output);
+
+        return Command::SUCCESS;
     }
 
     private function prepareMetadata()
