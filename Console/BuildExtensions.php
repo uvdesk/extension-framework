@@ -103,7 +103,7 @@ class BuildExtensions extends Command
         return $lockfile;
     }
 
-    private function updateComposerJson(array $lockfile = [], $output)
+    private function updateComposerJson($output, array $lockfile = [])
     {
         $path = $this->container->getParameter('kernel.project_dir') . "/composer.json";
         $prefix = str_ireplace($this->container->getParameter('kernel.project_dir') . "/", "", $this->container->getParameter('uvdesk_extensions.dir'));
@@ -166,7 +166,7 @@ class BuildExtensions extends Command
         return $reflectionClass;
     }
 
-    private function autoconfigurePackages(array $metadata = [], $output)
+    private function autoconfigurePackages($output, array $metadata = [])
     {
         $pathToConfig = $this->container->getParameter('kernel.project_dir') . "/config/extensions";
         $pathToDoctrineConfig = $this->container->getParameter('kernel.project_dir') . "/config/packages/doctrine.yaml";
