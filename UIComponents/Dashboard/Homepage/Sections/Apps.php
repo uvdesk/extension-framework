@@ -18,6 +18,6 @@ class Apps extends HomepageSection
 
     public static function getRoles() : array
     {
-        return [];
+        return ['ROLE_AGENT_MANAGE_APP'];
     }
 }

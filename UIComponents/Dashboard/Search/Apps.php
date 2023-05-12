@@ -34,4 +34,10 @@ SVG;
     {
         return [];
     }
+
+    public static function getRoles() : array
+    {
+        return ['ROLE_AGENT_MANAGE_APP'];
+    }
+    
 }

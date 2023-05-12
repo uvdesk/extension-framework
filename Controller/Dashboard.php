@@ -8,11 +8,17 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Webkul\UVDesk\ExtensionFrameworkBundle\Utils\ApplicationCollection;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Webkul\UVDesk\CoreFrameworkBundle\Services\UserService;
+
 
 class Dashboard extends AbstractController
 {
-    public function applications(Request $request)
+    public function applications(Request $request,ContainerInterface $container, UserService $userService)
     {
+        if (!$userService->isAccessAuthorized('ROLE_AGENT_MANAGE_APP')){
+            return $this->redirect($this->generateUrl('helpdesk_member_dashboard'));
+        }
+
         return $this->render('@UVDeskExtensionFramework//dashboard.html.twig', []);
     }
 
