@@ -58,7 +58,8 @@ This command will automatically search and configure any available packages foun
 License
 --------------
 
-The **UVDesk Extension Framework Bundle** and libraries included within the bundle are released under the MIT or BSD license.
+The **UVDesk Extension Framework Bundle** and libraries included within the bundle are released under the [OSL-3.0 license][3]
 
 [1]: https://getcomposer.org/
 [2]: https://github.com/uvdesk/ecommerce
+[3]: https://github.com/uvdesk/extension-framework/blob/master/LICENSE.txt
