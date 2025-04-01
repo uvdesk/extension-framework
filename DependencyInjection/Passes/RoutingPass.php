@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Webkul\UVDesk\ExtensionFrameworkBundle\Definition\RouteLoader;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Webkul\UVDesk\ExtensionFrameworkBundle\Definition\Routing\RoutingResourceInterface;
+use Webkul\UVDesk\ExtensionFrameworkBundle\Definition\Routing\ApiRoutingResourceInterface;
 use Webkul\UVDesk\ExtensionFrameworkBundle\Definition\Routing\ExposedRoutingResourceInterface;
 use Webkul\UVDesk\ExtensionFrameworkBundle\Definition\Routing\ProtectedRoutingResourceInterface;
 
@@ -24,6 +25,8 @@ class RoutingPass implements CompilerPassInterface
                     $router->addMethodCall('addExposedRoutingResource', array(new Reference($id), $tags));
                 } else if ($class->implementsInterface(ProtectedRoutingResourceInterface::class)) {
                     $router->addMethodCall('addProtectedRoutingResource', array(new Reference($id), $tags));
+                } else if ($class->implementsInterface(ApiRoutingResourceInterface::class)) {
+                    $router->addMethodCall('addApiRoutingResource', array(new Reference($id), $tags));
                 }
             }
         }

@@ -7,20 +7,40 @@ use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Webkul\UVDesk\CoreFrameworkBundle\Definition\RouterInterface;
 use Webkul\UVDesk\ExtensionFrameworkBundle\Definition\Routing\RoutingResourceInterface;
+use Webkul\UVDesk\ExtensionFrameworkBundle\Definition\Routing\ApiRoutingResourceInterface;
 use Webkul\UVDesk\ExtensionFrameworkBundle\Definition\Routing\ExposedRoutingResourceInterface;
 use Webkul\UVDesk\ExtensionFrameworkBundle\Definition\Routing\ProtectedRoutingResourceInterface;
 
 class RouteLoader extends Loader implements RouterInterface
 {
+    CONST API_PATH_PREFIX = '/api/';
     CONST EXPOSED_PATH_PREFIX = '/{_locale}/';
     CONST PROTECTED_PATH_PREFIX = '/{_locale}/%uvdesk_site_path.member_prefix%/';
 
+    private $apiRoutingResources = [];
     private $exposedRoutingResources = [];
     private $protectedRoutingResources = [];
     
     public function __construct(ContainerInterface $container)
 	{
         $this->env = $container->get('kernel')->getEnvironment();
+    }
+
+    public function addApiRoutingResource(ApiRoutingResourceInterface $routingResource, array $tags = [])
+    {
+        if (empty($tags)) {
+            $this->apiRoutingResources[] = $routingResource;
+
+            return;
+        }
+        
+        foreach ($tags as $tag) {
+            if (empty($tag) || empty($tag['env'])) {
+                $this->apiRoutingResources[] = $routingResource;
+            } else if (!empty($tag['env']) && $this->env === $tag['env']) {
+                $this->apiRoutingResources[] = $routingResource;
+            }
+        }
     }
 
     public function addExposedRoutingResource(ExposedRoutingResourceInterface $routingResource, array $tags = [])
@@ -60,6 +80,19 @@ class RouteLoader extends Loader implements RouterInterface
     public function load($resource, $type = null)
     {
         $routeCollection = new RouteCollection();
+
+        // Add api routing resources
+        foreach ($this->apiRoutingResources as $routingResource) {
+            $collection = $this->import($routingResource->getResourcePath(), $routingResource->getResourceType());
+
+            foreach ($collection->all() as $name => $route) {
+                $route->setPath(self::API_PATH_PREFIX . ltrim($route->getPath(), '/'));
+                $route->addDefaults(['_locale' => '%locale%']);
+                $route->addRequirements(['_locale' => '%app_locales%']);
+            }
+
+            $routeCollection->addCollection($collection);
+        }
 
         // Add private routing resources
         foreach ($this->protectedRoutingResources as $routingResource) {
